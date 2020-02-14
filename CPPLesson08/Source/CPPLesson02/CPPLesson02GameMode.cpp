@@ -16,7 +16,7 @@ ACPPLesson02GameMode::ACPPLesson02GameMode()
 	HUDClass = ACPPLesson02HUD::StaticClass();
 }
 
-void ACPPLesson02GameMode::CompleteMission(APawn* InstigatorPawn)
+void ACPPLesson02GameMode::CompleteMission(APawn* InstigatorPawn, bool MissionSuccess)
 {
 	if (InstigatorPawn)
 	{
@@ -31,7 +31,7 @@ void ACPPLesson02GameMode::CompleteMission(APawn* InstigatorPawn)
 		PC->SetViewTargetWithBlend(NewViewTarget, 5.0f, EViewTargetBlendFunction::VTBlend_Cubic);
 	}
 
-	OnMissionCompleted(InstigatorPawn);
+	OnMissionCompleted(InstigatorPawn, MissionSuccess);
 }
 
 	// Following is the best practice of checking each pointers 

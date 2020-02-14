@@ -1,0 +1,9 @@
+virtual  - specifies children are allowed to override the method.(specified in the parent method)
+
+override - said in the inherited class method it is overriding.
+
+super    - make sure parent class method will be called. 
+
+. (dot) operator and the -> (arrow) operator are used to reference individual members of classes, structures, and unions.
+
+The dot operator is applied to the actual object. The arrow operator is used with a pointer to an object.
