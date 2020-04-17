@@ -15,3 +15,11 @@ AFPSObjectiveGameMode::AFPSObjectiveGameMode()
 	// use our custom HUD class
 	HUDClass = AFPSObjectiveHUD::StaticClass();
 }
+void AFPSObjectiveGameMode::MissionComplete(APawn * InstigatorPawn)
+{
+	if (InstigatorPawn)
+		{
+			InstigatorPawn->DisableInput(nullptr);
+		}
+	OnMissionCompleted(InstigatorPawn);
+}

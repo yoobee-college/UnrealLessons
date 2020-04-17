@@ -13,6 +13,11 @@ class AFPSObjectiveGameMode : public AGameModeBase
 
 public:
 	AFPSObjectiveGameMode();
+	void MissionComplete(APawn* InstigatorPawn);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "GameMode")
+	void OnMissionCompleted(APawn* InstigatorPawn);
+
 };
 
 

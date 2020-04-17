@@ -3,7 +3,7 @@
 #include "CPPLesson01Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
-#include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "Kismet/GameplayStatics.h"
 
 ACPPLesson01Projectile::ACPPLesson01Projectile() 
 {
