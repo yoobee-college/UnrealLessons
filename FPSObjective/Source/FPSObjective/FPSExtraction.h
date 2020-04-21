@@ -25,6 +25,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Sounds")
+		USoundBase* ObjectiveMissingSound;
+
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UBoxComponent* OverlapComp;
 

@@ -7,6 +7,7 @@
 #include "FPSObjectiveCharacter.generated.h"
 
 class UInputComponent;
+class UPawnNoiseEmitterComponent;
 
 UCLASS(config=Game)
 class AFPSObjectiveCharacter : public ACharacter
@@ -141,6 +142,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Gameplay")
 		bool bIsCarryingObjective = false;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AI")
+	UPawnNoiseEmitterComponent* NoiseEmitterComponent;
 
 };
 

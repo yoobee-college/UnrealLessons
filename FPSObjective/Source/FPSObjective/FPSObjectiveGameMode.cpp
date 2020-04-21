@@ -4,6 +4,7 @@
 #include "FPSObjectiveHUD.h"
 #include "FPSObjectiveCharacter.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Kismet/GameplayStatics.h"
 
 AFPSObjectiveGameMode::AFPSObjectiveGameMode()
 	: Super()
@@ -18,8 +19,27 @@ AFPSObjectiveGameMode::AFPSObjectiveGameMode()
 void AFPSObjectiveGameMode::MissionComplete(APawn * InstigatorPawn)
 {
 	if (InstigatorPawn)
+	{
+		InstigatorPawn->DisableInput(nullptr);
+		if (SpectatingCameraClass)
 		{
-			InstigatorPawn->DisableInput(nullptr);
+			AActor* NewViewTarget = nullptr;
+			TArray<AActor*> ReturnedActors;
+			UGameplayStatics::GetAllActorsOfClass(this, SpectatingCameraClass, ReturnedActors);
+			if (ReturnedActors.Num() > 0)
+			{
+				NewViewTarget = ReturnedActors[0];
+				APlayerController* PC = Cast<APlayerController>(InstigatorPawn->GetController());
+				if (PC)
+				{
+					PC->SetViewTargetWithBlend(NewViewTarget, 1.0f, EViewTargetBlendFunction::VTBlend_Cubic);
+				}
+			}
 		}
-	OnMissionCompleted(InstigatorPawn);
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Cannot find Spectating Camera Class. Please Update Game Mode"))
+		}
+	}
+	//OnMissionCompleted(InstigatorPawn);
 }

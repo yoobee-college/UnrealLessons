@@ -5,6 +5,7 @@
 #include "Components/BoxComponent.h"
 #include "FPSObjectiveCharacter.h"
 #include "FPSObjectiveGameMode.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AFPSExtraction::AFPSExtraction()
@@ -44,6 +45,11 @@ void AFPSExtraction::HandleOverlap(UPrimitiveComponent * OverlappedComponent, AA
 {
 	UE_LOG(LogTemp, Warning, TEXT("Overlapped with extraction zone"));
 	AFPSObjectiveCharacter* MyPawn = Cast<AFPSObjectiveCharacter>(OtherActor);
+	if (MyPawn == nullptr)
+	{
+		return;
+	}
+
 	if (MyPawn != nullptr && MyPawn->bIsCarryingObjective)
 	{
 		AFPSObjectiveGameMode* GM = Cast<AFPSObjectiveGameMode>(GetWorld()->GetAuthGameMode());
@@ -52,6 +58,10 @@ void AFPSExtraction::HandleOverlap(UPrimitiveComponent * OverlappedComponent, AA
 			GM->MissionComplete(MyPawn);
 		}
 
+	}
+	else
+	{
+		UGameplayStatics::PlaySound2D(this, ObjectiveMissingSound);
 	}
 
 }
