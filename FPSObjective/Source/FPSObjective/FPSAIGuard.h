@@ -22,10 +22,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	UPawnSensingComponent* PawnSensingComp;
 
@@ -34,4 +30,8 @@ public:
 
 	UFUNCTION()
 	void OnNoiseHear(APawn* NoiseInstigator, const FVector& Location, float Volume);
+public:	
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+	
 };

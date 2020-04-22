@@ -37,7 +37,9 @@ void AFPSObjectiveProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherA
 	if ((OtherActor != NULL) && (OtherActor != this) && (OtherComp != NULL) && OtherComp->IsSimulatingPhysics())
 	{
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-
-		Destroy();
 	}
+	//UE_LOG(LogTemp, Warning, TEXT("HIT"));
+	MakeNoise(1.0f, Instigator);
+	Destroy();
+	UE_LOG(LogTemp, Warning, TEXT("HIT .........."));
 }
