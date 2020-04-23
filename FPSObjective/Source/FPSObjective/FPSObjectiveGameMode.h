@@ -13,10 +13,10 @@ class AFPSObjectiveGameMode : public AGameModeBase
 
 public:
 	AFPSObjectiveGameMode();
-	void MissionComplete(APawn* InstigatorPawn);
+	void MissionComplete(APawn* InstigatorPawn, bool MissionComplete);
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "GameMode")
-	void OnMissionCompleted(APawn* InstigatorPawn);
+	void OnMissionCompleted(APawn* InstigatorPawn, bool MissionComplete);
 
 	UPROPERTY(EditDefaultsOnly, Category = "Spectating")
 	TSubclassOf<AActor> SpectatingCameraClass;

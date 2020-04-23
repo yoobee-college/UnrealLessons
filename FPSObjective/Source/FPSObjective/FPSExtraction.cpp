@@ -55,7 +55,7 @@ void AFPSExtraction::HandleOverlap(UPrimitiveComponent * OverlappedComponent, AA
 		AFPSObjectiveGameMode* GM = Cast<AFPSObjectiveGameMode>(GetWorld()->GetAuthGameMode());
 		if (GM)
 		{
-			GM->MissionComplete(MyPawn);
+			GM->MissionComplete(MyPawn, true);
 		}
 
 	}

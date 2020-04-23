@@ -16,7 +16,7 @@ AFPSObjectiveGameMode::AFPSObjectiveGameMode()
 	// use our custom HUD class
 	HUDClass = AFPSObjectiveHUD::StaticClass();
 }
-void AFPSObjectiveGameMode::MissionComplete(APawn * InstigatorPawn)
+void AFPSObjectiveGameMode::MissionComplete(APawn * InstigatorPawn, bool MissionComplete)
 {
 	if (InstigatorPawn)
 	{
@@ -41,5 +41,5 @@ void AFPSObjectiveGameMode::MissionComplete(APawn * InstigatorPawn)
 			UE_LOG(LogTemp, Warning, TEXT("Cannot find Spectating Camera Class. Please Update Game Mode"))
 		}
 	}
-	//OnMissionCompleted(InstigatorPawn);
+	OnMissionCompleted(InstigatorPawn, MissionComplete);
 }
