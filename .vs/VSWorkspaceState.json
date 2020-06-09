@@ -3,10 +3,8 @@
     "",
     "\\CPPLesson07",
     "\\CPPLesson07\\Source",
-    "\\CPPLesson07\\Source\\CPPLesson02",
-    "\\CPPLesson07\\Source\\CPPLesson02\\Private",
-    "\\CPPLesson07\\Source\\CPPLesson02\\Public"
+    "\\CPPLesson07\\Source\\CPPLesson02"
   ],
-  "SelectedNode": "\\CPPLesson07\\Source\\CPPLesson02\\CPPLesson02.Build.cs",
+  "SelectedNode": "\\CPPLesson07\\Source\\CPPLesson02\\FPSAIGuard.h",
   "PreviewInSolutionExplorer": false
 }
