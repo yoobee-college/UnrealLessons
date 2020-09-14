@@ -8,6 +8,24 @@
 
 class UArrowComponent;
 class UPaperSpriteComponent;
+class UCameraComponent;
+class USpringArmComponent;
+
+USTRUCT(BlueprintType)
+struct FTankInput
+{
+	GENERATED_BODY()//To recognise by Unreal
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank Input")
+	FVector2D MovementInput;
+
+	void Sanitize();
+	void MoveX(float AxisValue);
+	void MoveY(float AxisValue);
+
+private:
+	FVector2D RawMovementInput;
+};
 
 UCLASS()
 class TANKS_API ATank : public APawn
@@ -39,4 +57,17 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Turret", meta = (AllowPrivateAccess = "true"))
 		UChildActorComponent* ChildTurret;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank", meta = (AllowPrivateAccess = "true"))
+		UCameraComponent* CameraComponent;
+
+	USpringArmComponent* SpringArm;
+
+private:
+	void MoveX(float AxisValue);
+	void MoveY(float AxisValue);
+
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank Input")
+	FTankInput TankInput;
 };
