@@ -70,4 +70,12 @@ private:
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank Input")
 	FTankInput TankInput;
+
+	//maximum turn rate of the tank
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Tank", meta = (ClampMin= "0.0"))
+		float YawSpeed;
+
+	// movement speed
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Tank", meta = (ClampMin = "0.0"))
+		float MoveSpeed;
 };

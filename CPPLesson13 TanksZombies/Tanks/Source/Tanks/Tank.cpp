@@ -56,7 +56,61 @@ void ATank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	TankInput.Sanitize();
-	UE_LOG(LogTemp, Warning, TEXT("Movement : (%f, %f)"), TankInput.MovementInput.X, TankInput.MovementInput.Y);
+
+	{ // Variables declare will exist only within this score.
+		FVector DesiredMovementDirection = FVector(TankInput.MovementInput.X, TankInput.MovementInput.Y, 0.0f);
+		if (!DesiredMovementDirection.IsNearlyZero())
+		{
+			//Rotate the Tank
+			FRotator MovementAngle = DesiredMovementDirection.Rotation();
+			float DeltaYaw = UTankStatics::FindDeltaAngleDegrees(TankDirection->GetComponentRotation().Yaw,MovementAngle.Yaw);
+			bool bReverse = false;
+			if (DeltaYaw != 0.0f)
+			{
+				float AdjustedDeltaYaw = DeltaYaw;
+				if (AdjustedDeltaYaw < -90.0f)
+				{
+					AdjustedDeltaYaw += 180.0f;
+					bReverse = true;
+				}
+				else if (AdjustedDeltaYaw > 90.0f)
+				{
+					AdjustedDeltaYaw -= 180.0f;
+					bReverse = true;
+			
+				}
+				float MaxYawThisFrame = YawSpeed * DeltaTime;
+				if (MaxYawThisFrame >= FMath::Abs(AdjustedDeltaYaw))
+				{
+					if (bReverse)
+					{
+						// move backward
+						FRotator FacingAngle = MovementAngle;
+						FacingAngle.Yaw = MovementAngle.Yaw + 180.0f;
+						TankDirection->SetWorldRotation(FacingAngle);
+					}
+					else
+					{
+						TankDirection->SetWorldRotation(MovementAngle);
+					}
+				}
+				else
+				{
+					// can reach out desired angle this frame , rotate part way.
+					TankDirection->AddLocalRotation(FRotator(0.0f, FMath::Sign(AdjustedDeltaYaw)*MaxYawThisFrame, 0.0f));
+				}
+				// Move the tank
+				{
+					FVector MovementDirection = TankDirection->GetForwardVector()* (bReverse ? -1.0f : 1.0f);
+					FVector Pos = GetActorLocation();
+					Pos.X += MovementDirection.X * MoveSpeed * DeltaTime;
+					Pos.Y += MovementDirection.Y * MoveSpeed * DeltaTime;
+					SetActorLocation(Pos);
+				}
+			}
+		}
+	}
+	//UE_LOG(LogTemp, Warning, TEXT("Movement : (%f, %f)"), TankInput.MovementInput.X, TankInput.MovementInput.Y);
 }
 
 // Called to bind functionality to input
