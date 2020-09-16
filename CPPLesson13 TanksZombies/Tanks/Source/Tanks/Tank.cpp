@@ -100,13 +100,13 @@ void ATank::Tick(float DeltaTime)
 					TankDirection->AddLocalRotation(FRotator(0.0f, FMath::Sign(AdjustedDeltaYaw)*MaxYawThisFrame, 0.0f));
 				}
 				// Move the tank
-				//{
-				//	FVector MovementDirection = TankDirection->GetForwardVector()* (bReverse ? -1.0f : 1.0f);
-				//	FVector Pos = GetActorLocation();
-				//	Pos.X += MovementDirection.X * MoveSpeed * DeltaTime;
-				//	Pos.Y += MovementDirection.Y * MoveSpeed * DeltaTime;
-				//	SetActorLocation(Pos);
-				//}
+				{
+					FVector MovementDirection = TankDirection->GetForwardVector()* (bReverse ? -1.0f : 1.0f);
+					FVector Pos = GetActorLocation();
+					Pos.X += MovementDirection.X * MoveSpeed * DeltaTime;
+					Pos.Y += MovementDirection.Y * MoveSpeed * DeltaTime;
+					SetActorLocation(Pos);
+				}
 			}
 		}
 	}
