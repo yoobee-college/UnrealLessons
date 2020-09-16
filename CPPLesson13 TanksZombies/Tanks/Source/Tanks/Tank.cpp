@@ -63,7 +63,7 @@ void ATank::Tick(float DeltaTime)
 		{
 			//Rotate the Tank
 			FRotator MovementAngle = DesiredMovementDirection.Rotation();
-			float DeltaYaw = UTankStatics::FindDeltaAngleDegrees(TankDirection->GetComponentRotation().Yaw,MovementAngle.Yaw);
+			float DeltaYaw = UTankStatics::FindDeltaAngleDegrees(TankDirection->GetComponentRotation().Yaw, MovementAngle.Yaw);
 			bool bReverse = false;
 			if (DeltaYaw != 0.0f)
 			{
@@ -77,7 +77,7 @@ void ATank::Tick(float DeltaTime)
 				{
 					AdjustedDeltaYaw -= 180.0f;
 					bReverse = true;
-			
+
 				}
 				float MaxYawThisFrame = YawSpeed * DeltaTime;
 				if (MaxYawThisFrame >= FMath::Abs(AdjustedDeltaYaw))
@@ -100,16 +100,17 @@ void ATank::Tick(float DeltaTime)
 					TankDirection->AddLocalRotation(FRotator(0.0f, FMath::Sign(AdjustedDeltaYaw)*MaxYawThisFrame, 0.0f));
 				}
 				// Move the tank
-				{
-					FVector MovementDirection = TankDirection->GetForwardVector()* (bReverse ? -1.0f : 1.0f);
-					FVector Pos = GetActorLocation();
-					Pos.X += MovementDirection.X * MoveSpeed * DeltaTime;
-					Pos.Y += MovementDirection.Y * MoveSpeed * DeltaTime;
-					SetActorLocation(Pos);
-				}
+				//{
+				//	FVector MovementDirection = TankDirection->GetForwardVector()* (bReverse ? -1.0f : 1.0f);
+				//	FVector Pos = GetActorLocation();
+				//	Pos.X += MovementDirection.X * MoveSpeed * DeltaTime;
+				//	Pos.Y += MovementDirection.Y * MoveSpeed * DeltaTime;
+				//	SetActorLocation(Pos);
+				//}
 			}
 		}
 	}
+
 	//UE_LOG(LogTemp, Warning, TEXT("Movement : (%f, %f)"), TankInput.MovementInput.X, TankInput.MovementInput.Y);
 }
 

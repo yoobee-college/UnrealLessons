@@ -78,4 +78,5 @@ protected:
 	// movement speed
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Tank", meta = (ClampMin = "0.0"))
 		float MoveSpeed;
+
 };
