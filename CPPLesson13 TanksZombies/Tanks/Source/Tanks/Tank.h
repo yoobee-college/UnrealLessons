@@ -19,9 +19,18 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank Input")
 	FVector2D MovementInput;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank input")
+		uint32 bFire1 : 1;
+	// declarse a variable of type uint32 of size 1 bit. They are booleans with less memory
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank input")
+		uint32 bFire2 : 1;
+
 	void Sanitize();
 	void MoveX(float AxisValue);
 	void MoveY(float AxisValue);
+	void Fire1(bool bPressed);
+	void Fire2(bool bPressed);
 
 private:
 	FVector2D RawMovementInput;
@@ -46,7 +55,9 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
+	
+	UFUNCTION(BlueprintCallable, Category = "Tank")
+	const FTankInput& GetCurrentInput() { return TankInput; }
 private:
 	// for debugging
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank", meta = (AllowPrivateAccess = "true"))
@@ -66,6 +77,10 @@ private:
 private:
 	void MoveX(float AxisValue);
 	void MoveY(float AxisValue);
+	void Fire1Pressed();
+	void Fire1Release();
+	void Fire2Pressed();
+	void Fire2Release();
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tank Input")

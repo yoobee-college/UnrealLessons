@@ -8,6 +8,8 @@
 
 class UArrowComponent;
 class UPaperSpriteComponent;
+class ATank;
+class AMissile;
 
 UCLASS()
 class TANKS_API ATurret : public AActor
@@ -33,5 +35,14 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Turret", meta = (AllowPrivateAccess = "true"))
 		UPaperSpriteComponent* TurretSprite;
 
+protected:
+	// Max turn rate in degrees per second for the turret
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Turret")
+		float YawSpeed;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Turret")
+		ATank* Tank;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Turret")
+		TSubclassOf<class AMissile> Projectile;
 };
